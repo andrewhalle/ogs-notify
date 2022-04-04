@@ -1,0 +1,19 @@
+[package]
+name = "ogs-notify"
+authors = [ "Andrew Halle <me@andrewhalle.dev>" ]
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+anyhow = "1.0.56"
+clap = { version = "3.1.8", features = [ "derive" ] }
+cookie_store = "0.15.1"
+directories = "4.0.1"
+ksni = "0.2.0"
+notify-rust = "4.5.8"
+rpassword = "6.0.1"
+serde = { version = "1.0.136", features = [ "derive" ] }
+serde_json = "1.0.79"
+ureq = { version = "2.4.0", features = [ "json", "cookies" ] }
