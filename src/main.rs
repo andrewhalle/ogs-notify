@@ -4,6 +4,9 @@ use std::thread;
 use anyhow::anyhow;
 use clap::Parser;
 use notify_rust::Notification;
+use qt_core::QString;
+use qt_gui::QIcon;
+use qt_widgets::{QApplication, QSystemTrayIcon};
 
 mod config;
 use config::Config;
@@ -37,6 +40,7 @@ fn main_with_config(config: Config) -> anyhow::Result<()> {
 
     let mut ogs_icon = config.icon_dir.clone();
     ogs_icon.push("ogs_icon.png");
+
     for game in &state.games_awaiting_move {
         Notification::new()
             .summary("ogs-notify")
@@ -52,6 +56,18 @@ fn main_with_config(config: Config) -> anyhow::Result<()> {
             .show()
             .unwrap();
     }
+
+    let ogs_icon_clone = ogs_icon.clone();
+    thread::spawn(move || {
+        QApplication::init(|_| unsafe {
+            let icon = QSystemTrayIcon::new();
+            icon.set_icon(&QIcon::from_q_string(&QString::from_std_str(
+                ogs_icon_clone.to_str().unwrap(),
+            )));
+            icon.show();
+            QApplication::exec()
+        });
+    });
 
     loop {
         thread::sleep(config.check_interval);
