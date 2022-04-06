@@ -905,6 +905,7 @@ dependencies = [
  "anyhow",
  "clap 3.1.8",
  "cookie_store",
+ "cpp_core",
  "directories",
  "ksni",
  "notify-rust",

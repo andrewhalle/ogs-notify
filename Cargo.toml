@@ -10,6 +10,7 @@ edition = "2021"
 anyhow = "1.0.56"
 clap = { version = "3.1.8", features = [ "derive" ] }
 cookie_store = "0.15.1"
+cpp_core = "0.6.0"
 directories = "4.0.1"
 ksni = "0.2.0"
 notify-rust = "4.5.8"
